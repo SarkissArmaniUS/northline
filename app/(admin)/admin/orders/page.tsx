@@ -89,9 +89,6 @@ export default async function AdminOrdersPage({ searchParams }: PageProps<"/admi
                                             <SubmitButton pendingLabel="Shipping..." className="underline underline-offset-4 hover:text-accent disabled:text-muted">
                                                 Mark shipped
                                             </SubmitButton>
-                                            {/*<button type="submit" className="underline underline-offset-4 hover:text-accent">*/}
-                                            {/*    Mark shipped*/}
-                                            {/*</button>*/}
                                         </form>
                                     )}
                                     {o.status === "pending" && (

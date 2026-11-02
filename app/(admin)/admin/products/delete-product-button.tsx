@@ -15,9 +15,6 @@ export function DeleteProductButton({ id, name }: { id: string; name: string }) 
             <SubmitButton pendingLabel="Deleting..." className="text-accent underline underline-offset-4 disabled:text-muted">
                 Delete
             </SubmitButton>
-            {/*<button type="submit" className="text-accent underline underline-offset-4">*/}
-            {/*    Delete*/}
-            {/*</button>*/}
         </form>
     );
 }
