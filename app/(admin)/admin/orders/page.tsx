@@ -94,9 +94,9 @@ export default async function AdminOrdersPage({ searchParams }: PageProps<"/admi
                                     {o.status === "pending" && (
                                         <form action={cancelOrderAction}>
                                             <input type="hidden" name="orderId" value={o.id} />
-                                            <button type="submit" className="text-muted underline underline-offset-4 hover:text-accent">
+                                            <SubmitButton pendingLabel="Cancelling..." className="text-muted underline underline-offset-4 hover:text-accent disabled:opacity-60">
                                                 Cancel
-                                            </button>
+                                            </SubmitButton>
                                         </form>
                                     )}
                                 </td>
