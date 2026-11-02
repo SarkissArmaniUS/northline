@@ -1,6 +1,7 @@
 "use client";
 
 import { deleteProductAction } from "./actions";
+import { SubmitButton } from "@/components/ui/submit-button";
 
 export function DeleteProductButton({ id, name }: { id: string; name: string }) {
     return (
@@ -11,9 +12,12 @@ export function DeleteProductButton({ id, name }: { id: string; name: string }) 
             }}
         >
             <input type="hidden" name="productId" value={id} />
-            <button type="submit" className="text-accent underline underline-offset-4">
+            <SubmitButton pendingLabel="Deleting..." className="text-accent underline underline-offset-4 disabled:text-muted">
                 Delete
-            </button>
+            </SubmitButton>
+            {/*<button type="submit" className="text-accent underline underline-offset-4">*/}
+            {/*    Delete*/}
+            {/*</button>*/}
         </form>
     );
 }

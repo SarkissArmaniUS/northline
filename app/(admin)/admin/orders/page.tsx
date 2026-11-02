@@ -5,6 +5,7 @@ import { requireAdmin } from "@/server/lib/require-admin";
 import { listOrdersAdmin } from "@/server/modules/orders/order.service";
 import { ORDER_STATUSES, type OrderStatus } from "@/server/modules/orders/status";
 import { cancelOrderAction, shipOrderAction } from "./actions";
+import { SubmitButton } from "@/components/ui/submit-button";
 
 export const metadata = { title: "Orders" };
 
@@ -85,9 +86,12 @@ export default async function AdminOrdersPage({ searchParams }: PageProps<"/admi
                                     {o.status === "paid" && (
                                         <form action={shipOrderAction}>
                                             <input type="hidden" name="orderId" value={o.id} />
-                                            <button type="submit" className="underline underline-offset-4 hover:text-accent">
+                                            <SubmitButton pendingLabel="Shipping..." className="underline underline-offset-4 hover:text-accent disabled:text-muted">
                                                 Mark shipped
-                                            </button>
+                                            </SubmitButton>
+                                            {/*<button type="submit" className="underline underline-offset-4 hover:text-accent">*/}
+                                            {/*    Mark shipped*/}
+                                            {/*</button>*/}
                                         </form>
                                     )}
                                     {o.status === "pending" && (

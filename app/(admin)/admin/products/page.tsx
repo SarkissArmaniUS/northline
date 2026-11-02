@@ -5,6 +5,7 @@ import { requireAdmin } from "@/server/lib/require-admin";
 import { listProductsAdmin } from "@/server/modules/products/product.admin";
 import { toggleProductAction } from "./actions";
 import { DeleteProductButton } from "./delete-product-button";
+import { SubmitButton } from "@/components/ui/submit-button";
 
 export const metadata = { title: "Products" };
 
@@ -89,10 +90,17 @@ export default async function AdminProductsPage({ searchParams }: PageProps<"/ad
                                         <form action={toggleProductAction}>
                                             <input type="hidden" name="productId" value={p.id} />
                                             <input type="hidden" name="active" value={p.isActive ? "0" : "1"} />
-                                            <button type="submit" className="underline underline-offset-4 hover:text-accent">
+                                            <SubmitButton pendingLabel="Saving..." className="underline underline-offset-4 hover:text-accent disabled:text-muted">
                                                 {p.isActive ? "Disable" : "Enable"}
-                                            </button>
+                                            </SubmitButton>
                                         </form>
+                                        {/*<form action={toggleProductAction}>*/}
+                                        {/*    <input type="hidden" name="productId" value={p.id} />*/}
+                                        {/*    <input type="hidden" name="active" value={p.isActive ? "0" : "1"} />*/}
+                                        {/*    <button type="submit" className="underline underline-offset-4 hover:text-accent">*/}
+                                        {/*        {p.isActive ? "Disable" : "Enable"}*/}
+                                        {/*    </button>*/}
+                                        {/*</form>*/}
                                         <DeleteProductButton id={p.id} name={p.name} />
                                     </div>
                                 </td>
