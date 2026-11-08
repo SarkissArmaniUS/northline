@@ -11,13 +11,17 @@ export const metadata = { title: "Products" };
 
 const NOTICES = {
     created: "Product created.",
+    updated: "Product updated.",
     deleted: "Product deleted.",
     "has-pending-orders":
         "Cannot delete: there are orders awaiting payment for this product. Disable it instead, or try again after they expire.",
     "not-found": "Product not found.",
 } as const;
 
-const noticeSchema = z.enum(["created", "deleted", "has-pending-orders", "not-found"]).optional().catch(undefined);
+const noticeSchema = z
+    .enum(["created", "updated", "deleted", "has-pending-orders", "not-found"])
+    .optional()
+    .catch(undefined);
 
 export default async function AdminProductsPage({ searchParams }: PageProps<"/admin/products">) {
     await requireAdmin();
@@ -87,6 +91,9 @@ export default async function AdminProductsPage({ searchParams }: PageProps<"/ad
                                 </td>
                                 <td className="py-4">
                                     <div className="flex items-center gap-4">
+                                        <Link href={`/admin/products/${p.id}/edit`} className="underline underline-offset-4 hover:text-accent">
+                                            Edit
+                                        </Link>
                                         <form action={toggleProductAction}>
                                             <input type="hidden" name="productId" value={p.id} />
                                             <input type="hidden" name="active" value={p.isActive ? "0" : "1"} />
