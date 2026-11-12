@@ -172,10 +172,21 @@ Sign out and back in so the new role is picked up.
 | `npm run lint` | ESLint |
 | `npm run typecheck` | Route types and `tsc` |
 | `npm test` | Vitest |
+| `npm run test:e2e` | Playwright end-to-end tests |
 | `npm run seed` | Reset products to sample data |
 | `npm run set-images` | Point products at the photos in `public/products` |
 | `npm run make-admin -- <email>` | Grant the admin role |
 | `npm run stripe:listen` | Forward Stripe events to localhost |
+
+## E2E tests
+
+Run the Playwright suite with:
+
+```bash
+npm run test:e2e
+```
+
+Tests run against a separate database configured via `MONGODB_URI_TEST` (the database name must include `test` so development or production data is never wiped). The suite covers 14 tests by default, or 16 tests when a valid `STRIPE_SECRET_KEY` (`sk_test_...`) is provided.
 
 ## How I used AI
 
@@ -183,7 +194,7 @@ I built this project with Claude as a pair-programming assistant, and I treated 
 
 - **Where I let it generate:** UI scaffolding, boilerplate, form markup, test drafts.
 - **Where I reviewed carefully:** payment flow, webhook, stock reservation, authentication and authorization, and database schemas. Anything touching money or access was read line by line and exercised before merging.
-- **How I verified:** TypeScript and ESLint, unit tests, `next build` before every merge, real test-mode payments, Stripe CLI event replays, and checking the resulting documents directly in MongoDB.
+- **How I verified:** TypeScript and ESLint, unit and E2E tests, `next build` before every merge, real test-mode payments, Stripe CLI event replays, and checking the resulting documents directly in MongoDB.
 
 Examples where checking mattered:
 
@@ -198,4 +209,3 @@ Examples where checking mattered:
 - Refunds are not automated. If a payment arrives for an already cancelled order, the app logs it for a manual refund.
 - No Content-Security-Policy yet, and rate limiting covers checkout only. Auth endpoints rely on Better Auth defaults.
 - Shipping, taxes and email notifications are out of scope. Stripe is in test mode.
-- No end-to-end browser tests yet.
